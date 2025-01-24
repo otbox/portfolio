@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.component {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    color: #333;
+    position: relative;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 5px solid transparent; /* Inicialmente a borda é invisível */
+    transition: border-color 0.2s ease;
+}
+
+.component::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 15px;
+    border: 5px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+}
