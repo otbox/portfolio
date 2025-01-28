@@ -39,7 +39,7 @@ header {
 }
 
 header * {
-    color: #F5F2D0;
+    color: white;
     font-size: 2rem;
     text-shadow: 
     3px 3px 1px rgba(0, 13, 255 , 1),
@@ -267,7 +267,8 @@ pt {
 
     .project-container .bola {
         width: 100%;
-        height: 30vh;
+        height: 20vh;
+        max-height: 15rem;
     }
 
     .links img {

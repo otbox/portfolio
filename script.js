@@ -19,7 +19,7 @@ function switchLanguage(language) {
     if (language === 'pt') {
         const ptElements = document.getElementsByClassName('pt');
         const enElements = document.getElementsByClassName('en');
-        image.src = imagem1;
+        image.src = `.${imagem1}`;
     
         for (let i = 0; i < ptElements.length; i++) {
             ptElements[i].style.display = 'block';
@@ -29,7 +29,7 @@ function switchLanguage(language) {
             enElements[i].style.display = 'none';
         }
     } else if (language === 'en') {
-        image.src = imagem2;
+        image.src = `.${imagem2}`;
         const ptElements = document.getElementsByClassName('pt');
         const enElements = document.getElementsByClassName('en');
     
