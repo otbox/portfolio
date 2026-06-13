@@ -1,197 +1,781 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-br" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cube.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;/dev&gt; Otávio Cruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       ART DIRECTION: Dark cyberpunk portfolio — Otávio Cruz
+       Palette: deep black surfaces, neon cyan primary, neon magenta accent
+       Typography: Share Tech Mono (display) + Inter (body)
+       Density: spacious with tight code-like sections
+    ============================================================ */
+
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+      --text-hero: clamp(3rem, 0.5rem + 7vw, 7rem);
+
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+      --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+      --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+      --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+
+      --color-bg: #080810;
+      --color-surface: #0d0d1a;
+      --color-surface-2: #111124;
+      --color-surface-offset: #161628;
+      --color-border: rgba(0,255,255,0.12);
+      --color-divider: rgba(0,255,255,0.07);
+
+      --color-text: #e2e8f0;
+      --color-text-muted: #94a3b8;
+      --color-text-faint: #475569;
+      --color-text-inverse: #080810;
+
+      --neon-cyan: #00fff7;
+      --neon-magenta: #ff00c8;
+      --neon-green: #39ff14;
+      --color-primary: #00fff7;
+      --color-primary-glow: rgba(0,255,247,0.3);
+      --color-accent: #ff00c8;
+      --color-accent-glow: rgba(255,0,200,0.3);
+
+      --radius-sm: 0.25rem; --radius-md: 0.5rem;
+      --radius-lg: 0.75rem; --radius-xl: 1rem;
+      --font-display: 'Share Tech Mono', 'Rajdhani', monospace;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100dvh;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    ul[role="list"] { list-style: none; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition-interactive); }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 3px; border-radius: var(--radius-sm); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* SCANLINE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+      );
+    }
+
+    /* GRID BACKGROUND */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,255,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,247,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* ============================================================ NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-4) var(--space-8);
+      background: rgba(8,8,16,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px var(--color-primary-glow), 0 0 32px var(--color-primary-glow);
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--neon-magenta); text-shadow: 0 0 12px var(--color-accent-glow); }
+    .nav-links { display: flex; gap: var(--space-8); align-items: center; }
+    .nav-links a {
+      font-family: var(--font-display); font-size: var(--text-sm);
+      color: var(--color-text-muted); letter-spacing: 0.1em; text-transform: uppercase;
+      padding: var(--space-2) 0; border-bottom: 1px solid transparent;
+      transition: color var(--transition-interactive), border-color var(--transition-interactive), text-shadow var(--transition-interactive);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--neon-cyan); border-bottom-color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--color-primary-glow);
+    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: var(--space-2); }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--neon-cyan); border-radius: 2px; transition: all 0.3s; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+        flex-direction: column; justify-content: center; align-items: center; gap: var(--space-12);
+        background: rgba(8,8,16,0.97); backdrop-filter: blur(20px); font-size: var(--text-lg);
+      }
+      .nav-links.open { display: flex; }
+    }
+
+    /* ============================================================ PAGES */
+    .page { display: none; min-height: 100dvh; padding-top: 70px; }
+    .page.active { display: block; }
+
+    /* ============================================================ HERO */
+    .hero {
+      min-height: calc(100dvh - 70px);
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-16) var(--space-8);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,255,247,0.04) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 60% at 20% 70%, rgba(255,0,200,0.04) 0%, transparent 70%);
+    }
+    .hero-content {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-16); align-items: center;
+      max-width: 1200px; width: 100%; position: relative; z-index: 1;
+    }
+    .hero-label {
+      font-family: var(--font-display); font-size: var(--text-xs);
+      color: var(--neon-cyan); letter-spacing: 0.3em; text-transform: uppercase;
+      margin-bottom: var(--space-4); opacity: 0.8;
+    }
+    .hero-name {
+      font-family: var(--font-display); font-size: var(--text-3xl);
+      font-weight: 700; line-height: 1.05; color: var(--color-text); margin-bottom: var(--space-4);
+    }
+    .hero-name .accent { color: var(--neon-cyan); text-shadow: 0 0 20px var(--color-primary-glow), 0 0 60px rgba(0,255,247,0.15); }
+    .hero-tagline {
+      font-family: var(--font-display); font-size: var(--text-xl);
+      color: var(--neon-magenta); text-shadow: 0 0 16px var(--color-accent-glow);
+      margin-bottom: var(--space-6); min-height: 2.5rem;
+    }
+    .cursor-blink { animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-desc {
+      color: var(--color-text-muted); font-size: var(--text-base);
+      max-width: 50ch; margin-bottom: var(--space-8); line-height: 1.7;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8); }
+    .badge {
+      font-family: var(--font-display); font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-3); border: 1px solid rgba(0,255,247,0.25);
+      border-radius: var(--radius-sm); color: var(--neon-cyan); background: rgba(0,255,247,0.05);
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .badge.magenta { border-color: rgba(255,0,200,0.25); color: var(--neon-magenta); background: rgba(255,0,200,0.05); }
+    .hero-cta { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+    .btn-primary {
+      font-family: var(--font-display); font-size: var(--text-sm);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: var(--space-3) var(--space-6); border: 1px solid var(--neon-cyan);
+      background: rgba(0,255,247,0.08); color: var(--neon-cyan); border-radius: var(--radius-sm);
+      text-shadow: 0 0 8px var(--color-primary-glow);
+      box-shadow: 0 0 12px rgba(0,255,247,0.1), inset 0 0 12px rgba(0,255,247,0.03);
+      transition: all var(--transition-interactive);
+    }
+    .btn-primary:hover { background: rgba(0,255,247,0.18); box-shadow: 0 0 24px rgba(0,255,247,0.2), inset 0 0 24px rgba(0,255,247,0.06); }
+    .btn-ghost {
+      font-family: var(--font-display); font-size: var(--text-sm);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: var(--space-3) var(--space-6); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--color-text-muted); border-radius: var(--radius-sm);
+      transition: all var(--transition-interactive);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: var(--color-text); }
+
+    /* CUBE */
+    .cube-wrapper { display: flex; align-items: center; justify-content: center; perspective: 600px; }
+    .scene { width: 180px; height: 180px; perspective: 600px; }
+    .cubo {
+      width: 180px; height: 180px; position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 10s infinite linear;
+    }
+    @keyframes rotateCube {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+    .face {
+      position: absolute; width: 180px; height: 180px;
+      border: 1px solid rgba(0,255,247,0.5);
+      background: rgba(0,255,247,0.03);
+      box-shadow: inset 0 0 30px rgba(0,255,247,0.08), 0 0 20px rgba(0,255,247,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: var(--text-xs);
+      color: rgba(0,255,247,0.4); letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .frente  { transform: translateZ(90px); }
+    .traz    { transform: rotateY(180deg) translateZ(90px); }
+    .direita { transform: rotateY(90deg) translateZ(90px); }
+    .esquerda{ transform: rotateY(-90deg) translateZ(90px); }
+    .cima    { transform: rotateX(90deg) translateZ(90px); }
+    .baixo   { transform: rotateX(-90deg) translateZ(90px); }
+
+    @media (max-width: 768px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .cube-wrapper { order: -1; }
+      .hero-badges, .hero-cta { justify-content: center; }
+    }
+
+    /* ============================================================ SECTIONS */
+    .section {
+      padding: clamp(var(--space-16), 8vw, var(--space-24)) var(--space-8);
+      max-width: 1200px; margin-inline: auto;
+    }
+    .section-header { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-12); }
+    .section-number { font-family: var(--font-display); font-size: var(--text-xs); color: var(--neon-cyan); letter-spacing: 0.3em; opacity: 0.6; }
+    .section-title { font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text); letter-spacing: 0.05em; }
+    .section-title .glow { color: var(--neon-cyan); text-shadow: 0 0 12px var(--color-primary-glow); }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,255,247,0.3), transparent); }
+
+    /* ============================================================ PROJECT CARDS */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)); gap: var(--space-6);
+    }
+    .project-card {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); padding: var(--space-6);
+      position: relative; overflow: hidden;
+      transition: border-color var(--transition-interactive), box-shadow var(--transition-interactive), transform var(--transition-interactive);
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      opacity: 0; transition: opacity var(--transition-interactive);
+    }
+    .project-card:hover { border-color: rgba(0,255,247,0.3); box-shadow: 0 0 30px rgba(0,255,247,0.06); transform: translateY(-2px); }
+    .project-card:hover::before { opacity: 1; }
+    .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4); }
+    .project-tag { font-family: var(--font-display); font-size: var(--text-xs); color: var(--neon-magenta); letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
+    .project-links { display: flex; gap: var(--space-3); }
+    .project-links a { color: var(--color-text-faint); transition: color var(--transition-interactive); display: flex; align-items: center; }
+    .project-links a:hover { color: var(--neon-cyan); }
+    .project-links a svg { width: 18px; height: 18px; }
+    .project-title { font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); letter-spacing: 0.03em; }
+    .project-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-5); }
+    .project-tech { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .tech-pill {
+      font-family: var(--font-display); font-size: var(--text-xs);
+      padding: 2px var(--space-2); background: rgba(0,255,247,0.06);
+      border: 1px solid rgba(0,255,247,0.15); border-radius: var(--radius-sm);
+      color: var(--neon-cyan); letter-spacing: 0.05em; opacity: 0.85;
+    }
+
+    /* ============================================================ TIMELINE */
+    .timeline { position: relative; padding-left: var(--space-8); }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(180deg, transparent, var(--neon-cyan) 10%, rgba(0,255,247,0.3) 80%, transparent);
+    }
+    .timeline-item { position: relative; margin-bottom: var(--space-12); }
+    .timeline-dot {
+      position: absolute; left: calc(-1 * var(--space-8) - 5px); top: 6px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--neon-cyan); box-shadow: 0 0 10px var(--color-primary-glow), 0 0 20px rgba(0,255,247,0.2);
+    }
+    .timeline-dot.magenta { background: var(--neon-magenta); box-shadow: 0 0 10px var(--color-accent-glow); }
+    .timeline-year { font-family: var(--font-display); font-size: var(--text-xs); color: var(--neon-cyan); letter-spacing: 0.2em; margin-bottom: var(--space-1); opacity: 0.7; }
+    .timeline-year.magenta { color: var(--neon-magenta); }
+    .timeline-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-2); letter-spacing: 0.03em; }
+    .timeline-body { font-size: var(--text-sm); color: var(--color-text-muted); max-width: 60ch; line-height: 1.7; }
+
+    /* ============================================================ SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-3); }
+    .skill-item {
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+      padding: var(--space-4) var(--space-3); background: var(--color-surface);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      transition: all var(--transition-interactive); cursor: default;
+    }
+    .skill-item:hover { border-color: rgba(0,255,247,0.3); background: var(--color-surface-2); box-shadow: 0 0 20px rgba(0,255,247,0.05); }
+    .skill-item img { width: 36px; height: 36px; object-fit: contain; }
+    .skill-item span { font-family: var(--font-display); font-size: var(--text-xs); color: var(--color-text-muted); letter-spacing: 0.05em; text-align: center; }
+
+    /* SOCIAL */
+    .social-row { display: flex; gap: var(--space-4); margin-top: var(--space-8); flex-wrap: wrap; }
+    .social-link {
+      display: flex; align-items: center; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--text-sm); color: var(--color-text-muted);
+      padding: var(--space-3) var(--space-5); border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); letter-spacing: 0.1em; text-transform: uppercase;
+      transition: all var(--transition-interactive);
+    }
+    .social-link:hover { color: var(--neon-cyan); border-color: rgba(0,255,247,0.3); background: rgba(0,255,247,0.04); }
+    .social-link svg { width: 18px; height: 18px; }
+
+    /* ============================================================ COMING SOON */
+    .coming-soon-wrapper {
+      min-height: calc(100dvh - 70px); display: flex; align-items: center; justify-content: center;
+      padding: var(--space-16) var(--space-8); position: relative; overflow: hidden;
+    }
+    .coming-soon-inner { text-align: center; position: relative; z-index: 1; }
+    .coming-soon-glitch {
+      font-family: var(--font-display); font-size: var(--text-hero); font-weight: 700;
+      color: var(--color-text); letter-spacing: 0.05em;
+      animation: glitchAnim 5s infinite;
+    }
+    @keyframes glitchAnim {
+      0%,90%,100% { text-shadow: none; transform: none; }
+      92% { text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-magenta); transform: skewX(-1deg); }
+      94% { text-shadow: 3px 0 var(--neon-cyan), -3px 0 var(--neon-magenta); transform: skewX(1deg); }
+      96% { text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-magenta); transform: skewX(0); }
+    }
+    .coming-soon-sub { font-family: var(--font-display); font-size: var(--text-base); color: var(--color-text-muted); letter-spacing: 0.3em; text-transform: uppercase; margin-top: var(--space-4); }
+    .coming-soon-bg-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,255,247,0.03) 0%, transparent 70%);
+    }
+
+    /* ============================================================ ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); padding: var(--space-6);
+      transition: all var(--transition-interactive);
+    }
+    .about-card:hover { border-color: rgba(0,255,247,0.2); }
+    .about-card-icon { font-size: 2rem; margin-bottom: var(--space-3); display: block; }
+    .about-card-title {
+      font-family: var(--font-display); font-size: var(--text-base);
+      color: var(--neon-cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3);
+    }
+    .about-card p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; }
+    .hobbies-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+    .hobbies-list li { display: flex; align-items: flex-start; gap: var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+    .hobbies-list li::before { content: '>'; font-family: var(--font-display); color: var(--neon-cyan); font-size: var(--text-xs); margin-top: 3px; flex-shrink: 0; }
+
+    /* ============================================================ ACADEMIC */
+    .academic-section {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); padding: var(--space-8); margin-bottom: var(--space-8);
+      position: relative; overflow: hidden; transition: border-color var(--transition-interactive);
+    }
+    .academic-section:hover { border-color: rgba(0,255,247,0.2); }
+    .academic-section::after {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-magenta));
+    }
+    .academic-label { font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.3em; text-transform: uppercase; color: var(--neon-cyan); margin-bottom: var(--space-2); }
+    .academic-title { font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text); margin-bottom: var(--space-4); letter-spacing: 0.03em; }
+    .academic-body { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.8; max-width: 70ch; }
+    .academic-body em { font-style: normal; color: var(--neon-cyan); }
+    .academic-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
+    .academic-tag {
+      font-family: var(--font-display); font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-3); border: 1px solid rgba(255,0,200,0.25);
+      color: var(--neon-magenta); background: rgba(255,0,200,0.05);
+      border-radius: var(--radius-sm); letter-spacing: 0.05em; text-transform: uppercase;
+    }
+
+    /* ============================================================ FOOTER */
+    footer {
+      border-top: 1px solid var(--color-divider); padding: var(--space-8);
+      text-align: center; font-family: var(--font-display); font-size: var(--text-xs);
+      color: var(--color-text-faint); letter-spacing: 0.2em;
+    }
+    footer span { color: var(--neon-cyan); }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 1; }
+    @supports (animation-timeline: scroll()) {
+      .reveal { opacity: 0; animation: reveal-fade linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+      @keyframes reveal-fade { to { opacity: 1; } }
+    }
+  </style>
 </head>
 
-<body>
-    <header>
-        <h1>&lt/dev&gt Otávio Cruz</h1>
-        <img onclick="switchLanguage()" id="language" src="" alt="" height="50px" width="50px">
-    </header>
-    <div class="home">
-        <div class="typewriter">
-            <h1 class="en">I'm a Developer</h1>
-            <h1 class="pt">Sou Desenvolvedor</h1>
-        </div>
-        <!-- <img src="./assets/csharp-svgrepo-com.svg" alt="Otavio" id="self"> -->
-        <div class="cubo">
-            <div class="face traz"></div>
-            <div class="face direita"></div>
-            <div class="face esquerda"></div>
-            <div class="face cima"> </div>
-            <div class="face baixo"> </div>
-            <div class="face frente"></div>
-        </div>
-    </div>
-    <div class="description">
-        <h3 class="en">About Me</h3>
-        <h3 class="pt">Sobre mim</h3>
-        <p class="en">
-            I'm Otávio Marques Cruz, currently living in Limeira. I have curiosity about
-            new technologies, and i strive for self-improvement, not only in my Abilities, but also as a person. 
-        </p>
-        <p class="pt">
-            Eu sou Otávio Marques Cruz, atualmente morando em Limeira. Tenho curiosidade sobre novas tecnologias e busco o autoaperfeiçoamento, não apenas nas minhas habilidades, mas também como pessoa.
-        </p>
-        <!-- Sobre mim, sou Otávio Marques Cruz atualmente residindo em Limeira, tenho  -->
-        <!-- curiosidade sobre novas tecnólogias e busco o auto aprimoramento, não só de  -->
-        <!-- minhas habilidades, como próprio.  -->
-        <br/> <br/>
-        <p class="en">
-            Currently studying Systems Analysis and Development at Unicamp, 
-            focusing on technologies such as React and React Native. 
-            I am particularly interested in programming for web and multiplatform applications.
-        </p>
-        <p class="pt">
-            Atualmente, estou cursando Análise e Desenvolvimento de Sistemas na Unicamp, focando em tecnologias como React e React Native.
-            Tenho particular interesse em programação para web e aplicativos multiplataforma.
-        </p>
-        
-        <br> <br>
-        <p class="en">
-            I began programming in 2021 during the pandemic. While staying at home,
-             I started exploring new topics to study and discovered an interest in programming. 
-             I began with web development, learning HTML and CSS through online courses. 
-             Later, I enrolled in the Integrated Technical High School in Information Technology 
-             at Escolas Padre Anchieta, where I gained knowledge in HTML, CSS, JavaScript, Java, C#, 
-             SQL Server, Arduino, and Networking. Additionally, I studied React and React Native
-              independently to apply these technologies in my final project (TCC).
-        </p>
-        <p class="pt">
-            Comecei a programar em 2021, durante a pandemia. Enquanto ficava em casa, comecei a explorar novos temas para estudar e descobri um interesse por programação.
-            Comecei com desenvolvimento web, aprendendo HTML e CSS através de cursos online.
-            Mais tarde, me matriculei no Ensino Técnico Integrado em Tecnologia da Informação na Escolas Padre Anchieta, onde adquiri conhecimentos em HTML, CSS, JavaScript, Java, C#, SQL Server, Arduino e Redes de Computadores. Além disso, estudei React e React Native de forma independente para aplicar essas tecnologias no meu projeto final (TCC).
-        </p>
-        <!-- Atualmente cursando Análise e desenvolvimento de Sistemas na Unicamp, 
-        estudando técnologias como React, React Native, tenho curiosidade sobre
-        programação para Apps multiplataforma e Web. -->
-    </div>
+<body class="grid-bg">
 
-    <h2 class="en">Projects</h2>
-    <h2 class="pt">Projetos</h2>
-    <div class="projects">
-        <div class="project-container">
-            <img src="./assets/Estufa.png" alt="teste" class="bola">
-            <div class="content">
-                <h3 class="component en">Greenhouse management</h3>
-                <p class="en">Web and App, made with React, React Native, Axios. Using Arduino for collect data about humidity and temperature, then controls devices.
-                    With an API PHP, to send data and receive to the MySQL database.
-                    For test, uses user:"teste" pass:"123"
-                </p>
-                <h3 class="component pt">Gestão de Estufa</h3>
-                <p class="pt">Web e App, feitos com React, React Native, Axios. Usando Arduino para coletar dados sobre umidade e temperatura, e depois controlar dispositivos.
-                    Com uma API PHP, para enviar dados e recebê-los no banco de dados MySQL.
-                    Para teste, utiliza usuário:"teste" senha:"123"
-                </p>
-                <div class="links">
-                    <a target="_blank" href="https://github.com/otbox/TCC">
-                        <img src="./assets/github-142-svgrepo-com.svg" alt="code">
-                    </a>
-                    <a target="_blank" href="https://estufa-5414b.web.app/">
-                        <img src="./assets/link-alt-svgrepo-com.svg" alt="link">
-                    </a>
-                </div>
+  <nav>
+    <div class="nav-logo">&lt;<span>/</span>dev&gt; Otávio Cruz</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home"     class="active" onclick="navigate('home')">Home</a>
+      <a href="#projects" onclick="navigate('projects')">Projetos</a>
+      <a href="#about"    onclick="navigate('about')">About</a>
+      <a href="#academic" onclick="navigate('academic')">Acadêmico</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== HOME ===== -->
+  <div class="page active" id="page-home">
+    <section class="hero">
+      <div class="hero-bg-glow"></div>
+      <div class="hero-content">
+        <div>
+          <p class="hero-label">// Full-Stack Developer — Limeira/SP</p>
+          <h1 class="hero-name">Otávio<br><span class="accent">Cruz</span></h1>
+          <p class="hero-tagline" id="typewriter"><span class="cursor-blink">_</span></p>
+          <p class="hero-desc">Desenvolvedor apaixonado por transformar lógica em interfaces. Graduando em ADS na <strong style="color:var(--color-text)">Unicamp</strong>, com foco em React/Next.js, TypeScript, Docker e arquitetura de software.</p>
+          <div class="hero-badges">
+            <span class="badge">React</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge magenta">Laravel</span>
+            <span class="badge magenta">PHP</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Node.js</span>
+            <span class="badge magenta">Arduino</span>
+          </div>
+          <div class="hero-cta">
+            <a href="#projects" class="btn-primary" onclick="navigate('projects')">Ver Projetos</a>
+            <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="cube-wrapper">
+          <div class="scene">
+            <div class="cubo">
+              <div class="face frente">OTÁVIO</div>
+              <div class="face traz">DEV</div>
+              <div class="face direita">CODE</div>
+              <div class="face esquerda">BUILD</div>
+              <div class="face cima">REACT</div>
+              <div class="face baixo">PHP</div>
             </div>
+          </div>
         </div>
-        <div class="project-container">
-            <img src="./assets/Ecommerce.png" alt="teste" class="bola">
-            <div class="content">
-                <h3 class="component en">Simple ECommerce</h3>
-                <p class="en">
-                    A simple Ecommerce made with React, with API PHP to manage the data, and MySQL database.
-                    The most difficult in this project, was in a low budget, using different ways to storage data.
-                    MySQL database, that storage the products, and the references to the images on IMGBB.
-                    On create new products, that compress to a low quality, and then, to upload to the IMGBB, that returns the URL of the image, and add to database.
-                </p>
-                <h3 class="component pt">Ecommerce Simples</h3>
-                <p class="pt">
-                    Um ecommerce simples feito com React, com API PHP para gerenciar os dados, e banco de dados MySQL.
-                    O mais difícil nesse projeto foi o orçamento baixo, usando diferentes maneiras de armazenar dados.
-                    Banco de dados MySQL, que armazena os produtos, e as referências para as imagens no IMGBB.
-                    Ao criar novos produtos, as imagens são comprimidas para baixa qualidade e depois enviadas para o IMGBB, que retorna a URL da imagem e a adiciona ao banco de dados.
-                </p>
+      </div>
+    </section>
 
-                <div class="links">
-                    <!-- <img src="./assets/github-142-svgrepo-com.svg" alt="code"> -->
-                    <a target="_blank" href="https://loja-705b4.web.app/">
-                        <img src="./assets/link-alt-svgrepo-com.svg" alt="link">
-                    </a>
-                </div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Projetos em <span class="glow">Destaque</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-card-top">
+            <span class="project-tag">IoT · Full-Stack</span>
+            <div class="project-links">
+              <a href="https://github.com/otbox/TCC" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              </a>
+              <a href="https://estufa-5414b.web.app/" target="_blank" rel="noopener noreferrer" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
             </div>
+          </div>
+          <h3 class="project-title">Gestão de Estufa</h3>
+          <p class="project-desc">Sistema IoT de monitoramento em tempo real com Arduino coletando temperatura e umidade, controlando dispositivos automaticamente. Web + App mobile com API PHP e banco MySQL.</p>
+          <div class="project-tech">
+            <span class="tech-pill">React</span><span class="tech-pill">React Native</span>
+            <span class="tech-pill">PHP</span><span class="tech-pill">MySQL</span>
+            <span class="tech-pill">Arduino</span><span class="tech-pill">Axios</span>
+          </div>
         </div>
-        <div class="project-container">
-            <img src="./assets/Spotify.png" alt="teste" class="bola">
-            <div class="content">
-                <h3 class="component en">Spotify Downloader with Lyrics (in Work)</h3>
-                <p class="en">
-                    A simple Spotify Downloader made with web client, with API Spotify, to download the songs, and the lyrics. 
-                    On server used nodeJS, FFmpeg is required for the ytdlp library. Server are on Docker container. Front-End 
-                    made with React, and search by Spotify API.
-                    While, only works on playlists.
-                </p>
-                <h3 class="component pt">Spotify Downloader com Letras (em andamento)</h3>
-                <p class="pt">
-                    Um simples Spotify Downloader feito com cliente web, usando a API do Spotify para baixar as músicas e as letras.
-                    No servidor, foi utilizado o nodeJS, e o FFmpeg é necessário para a biblioteca ytdlp. O servidor está em um contêiner Docker. O Front-End foi feito com React, e a busca é realizada pela API do Spotify.
-                    Por enquanto, funciona apenas em playlists.
-                </p>
-                <div class="links">
-                    <a href="http://" target="_blank">
-                        <img src="./assets/github-142-svgrepo-com.svg" alt="code">
-                    </a>
-                    <!-- <img src="./assets/link-alt-svgrepo-com.svg" alt="link"> -->
-                </div>
+        <div class="project-card reveal">
+          <div class="project-card-top">
+            <span class="project-tag">E-commerce · Full-Stack</span>
+            <div class="project-links">
+              <a href="https://loja-705b4.web.app/" target="_blank" rel="noopener noreferrer" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
             </div>
-        </div>    
+          </div>
+          <h3 class="project-title">Ecommerce Simples</h3>
+          <p class="project-desc">Plataforma de vendas com React, API PHP e MySQL. Solução criativa para armazenamento de imagens via IMGBB com compressão automática — orçamento zero de infraestrutura.</p>
+          <div class="project-tech">
+            <span class="tech-pill">React</span><span class="tech-pill">PHP</span>
+            <span class="tech-pill">MySQL</span><span class="tech-pill">IMGBB API</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card-top">
+            <span class="project-tag">Automação · DevOps</span>
+            <div class="project-links">
+              <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.8.5.6-2.8 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Spotify Downloader</h3>
+          <p class="project-desc">Downloader de playlists Spotify com busca via API oficial, servidor Node.js + FFmpeg + yt-dlp, tudo containerizado com Docker. Frontend em React.</p>
+          <div class="project-tech">
+            <span class="tech-pill">React</span><span class="tech-pill">Node.js</span>
+            <span class="tech-pill">Docker</span><span class="tech-pill">Spotify API</span><span class="tech-pill">FFmpeg</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <br>
-    <h2 class="en">Technologies</h2>
-    <h2 class="pt">Tecnologias</h2>
-    <div class="technology-container">
-            <img src="./assets/html-124-svgrepo-com.svg" alt="c#">
-            <img src="./assets/css3-02-svgrepo-com.svg" alt="css">
-            <img src="./assets/javascript-fill-svgrepo-com.svg" alt="javascript">
-            <img src="./assets/typescript-svgrepo-com.svg" alt="Typescript">
-            <img src="./assets/react-svgrepo-com.svg" alt="React">
-            <img src="./assets/flutter-svgrepo-com.svg" alt="flutter">
-            <img src="./assets/git-svgrepo-com.svg" alt="git">
-            <img src="./assets/linux-svgrepo-com.svg" alt="linux">
-            <img src="./assets/sql-file-format-symbol-svgrepo-com.svg" alt="SQL">
-            <img src="./assets/java-svgrepo-com.svg" alt="Java">
-            <img src="./assets/c-svgrepo-com.svg" alt="c">
-    </div>
-    <div class="contato ptbr">
-        <h2>Redes Sociais</h2>
-        <div class="contato-container">
-            <a target="_blank" href="https://www.linkedin.com/in/otávio-marques-cruz-0774912aa">
-                <img src="assets/linkedin.png" alt="linkedin"/>
-            </a>
-            <a target="_blank" href="https://github.com/otbox">
-                <img src="assets/github-142-svgrepo-com.svg" alt="GitHub"/>
-            </a>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Linha do <span class="glow">Tempo</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <div class="timeline-title">Início na Programação</div>
+          <div class="timeline-body">Durante a pandemia, começou a explorar desenvolvimento web por conta própria. Primeiros passos com HTML e CSS em cursos online — o início de tudo.</div>
         </div>
-    </div>
-<!-- 
-    <div class="deadline">
-        <div class="cubo2">
-            <div class="face2 traz2"></div>
-            <div class="face2 direita2"></div>
-            <div class="face2 esquerda2"></div>
-            <div class="face2 cima2"> </div>
-            <div class="face2 baixo2"> </div>
-            <div class="face2 frente2"></div>
+        <div class="timeline-item">
+          <div class="timeline-dot magenta"></div>
+          <div class="timeline-year magenta">2022</div>
+          <div class="timeline-title">Ensino Técnico — Escolas Padre Anchieta</div>
+          <div class="timeline-body">Formação técnica integrada em TI: HTML, CSS, JavaScript, Java, C#, SQL Server, Arduino e Redes de Computadores.</div>
         </div>
-        <hr />
-    </div> -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2023</div>
+          <div class="timeline-title">TCC — Gestão de Estufa</div>
+          <div class="timeline-body">Projeto final integrando React, React Native, PHP, MySQL e Arduino num sistema IoT real de controle ambiental automatizado.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot magenta"></div>
+          <div class="timeline-year magenta">2024</div>
+          <div class="timeline-title">ADS — Unicamp</div>
+          <div class="timeline-body">Ingresso em Análise e Desenvolvimento de Sistemas na Unicamp (TADS). Aprofundamento em TypeScript, Docker, arquitetura e full-stack.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">Mercado & Stack de Produção</div>
+          <div class="timeline-body">Evolução para Next.js, TypeScript avançado, CI/CD no GitLab, containers Docker e início do backend com Laravel/PHP.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot magenta"></div>
+          <div class="timeline-year magenta">2026 — Agora</div>
+          <div class="timeline-title">Full-Stack + Pesquisa Acadêmica</div>
+          <div class="timeline-body">Atuando como desenvolvedor full-stack com foco em performance. Em paralelo, desenvolvendo projeto de pesquisa na Unicamp e extensão com crianças.</div>
+        </div>
+      </div>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Stack de <span class="glow">Tecnologias</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" width="36" height="36" loading="lazy"><span>HTML5</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/css3/1572B6" alt="CSS3" width="36" height="36" loading="lazy"><span>CSS3</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" width="36" height="36" loading="lazy"><span>JavaScript</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" width="36" height="36" loading="lazy"><span>TypeScript</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" width="36" height="36" loading="lazy"><span>React</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/nextdotjs/ffffff" alt="Next.js" width="36" height="36" loading="lazy"><span>Next.js</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel" width="36" height="36" loading="lazy"><span>Laravel</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP" width="36" height="36" loading="lazy"><span>PHP</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="36" height="36" loading="lazy"><span>Docker</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" width="36" height="36" loading="lazy"><span>Git</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/linux/ffffff" alt="Linux" width="36" height="36" loading="lazy"><span>Linux</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/arduino/00979D" alt="Arduino" width="36" height="36" loading="lazy"><span>Arduino</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" width="36" height="36" loading="lazy"><span>Python</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" width="36" height="36" loading="lazy"><span>MySQL</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/vite/646CFF" alt="Vite" width="36" height="36" loading="lazy"><span>Vite</span></div>
+        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" width="36" height="36" loading="lazy"><span>Node.js</span></div>
+      </div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/otávio-marques-cruz-0774912aa" target="_blank" rel="noopener noreferrer" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026 — Feito com neon e caffeine ☕</footer>
+  </div>
+
+  <!-- ===== PROJECTS ===== -->
+  <div class="page" id="page-projects">
+    <div class="coming-soon-wrapper">
+      <div class="coming-soon-bg-glow"></div>
+      <div class="coming-soon-inner">
+        <div class="coming-soon-glitch">EM BREVE</div>
+        <p class="coming-soon-sub">// nova visualização de projetos em construção</p>
+        <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <span class="badge">Galeria Interativa</span>
+          <span class="badge magenta">Filtro por Tech</span>
+          <span class="badge">Case Studies</span>
+        </div>
+        <div style="margin-top:2rem;">
+          <a href="#home" class="btn-ghost" onclick="navigate('home')">← Voltar ao Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT ===== -->
+  <div class="page" id="page-about">
+    <div class="section" style="padding-top:clamp(2rem,6vw,5rem);">
+      <div class="section-header">
+        <span class="section-number">00</span>
+        <h2 class="section-title">Sobre <span class="glow">Mim</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div style="max-width:70ch;margin-bottom:var(--space-12);">
+        <p style="color:var(--color-text-muted);font-size:var(--text-base);line-height:1.9;">
+          Além do terminal e do editor, tem uma pessoa curiosa que gosta tanto de desmontar um motor quanto de montar um circuito. Sou movido pela curiosidade — dentro e fora do código.
+        </p>
+      </div>
+      <div class="about-grid">
+        <div>
+          <div class="about-card reveal">
+            <span class="about-card-icon">🚗</span>
+            <div class="about-card-title">Mecânica & Carros</div>
+            <p>Apaixonado por automóveis e manutenção automotiva. Gosto de entender como as coisas funcionam por baixo do capô — tanto nos carros quanto nos sistemas que programo.</p>
+          </div>
+          <div class="about-card reveal" style="margin-top:var(--space-4);">
+            <span class="about-card-icon">🔌</span>
+            <div class="about-card-title">Eletrônica & IoT</div>
+            <p>Eletrônica e projetos com Arduino e sensores são meu playground físico. A ideia de conectar o mundo digital ao físico é o que me levou a criar o projeto da estufa.</p>
+          </div>
+        </div>
+        <div>
+          <div class="about-card reveal">
+            <span class="about-card-icon">🍳</span>
+            <div class="about-card-title">Culinária</div>
+            <p>Cozinhar é uma forma de criatividade fora da tela. Seguir uma receita como um algoritmo, ajustar os parâmetros ao gosto — há mais lógica na cozinha do que parece.</p>
+          </div>
+          <div class="about-card reveal" style="margin-top:var(--space-4);">
+            <span class="about-card-icon">📡</span>
+            <div class="about-card-title">Smart Devices</div>
+            <p>Curioso por automação residencial, dispositivos inteligentes e o universo de gadgets conectados. Sempre explorando o que há de novo no ecossistema IoT.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:var(--space-12);">
+        <div class="section-header">
+          <span class="section-number">—</span>
+          <h3 class="section-title" style="font-size:var(--text-lg);">O que me move</h3>
+          <div class="section-line"></div>
+        </div>
+        <ul class="hobbies-list">
+          <li>Aprender continuamente — backend, machine learning e visão computacional</li>
+          <li>Resolver problemas complexos de performance e arquitetura de sistemas</li>
+          <li>Construir coisas que existam de verdade — hardware, IoT, automação física</li>
+          <li>Explorar a intersecção entre desenvolvimento de software e o mundo físico</li>
+          <li>Contribuir com projetos que impactem pessoas reais</li>
+        </ul>
+      </div>
+    </div>
+    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026</footer>
+  </div>
+
+  <!-- ===== ACADEMIC ===== -->
+  <div class="page" id="page-academic">
+    <div class="section" style="padding-top:clamp(2rem,6vw,5rem);">
+      <div class="section-header">
+        <span class="section-number">EDU</span>
+        <h2 class="section-title">Acadêmico <span class="glow">&amp; Pesquisa</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div style="max-width:70ch;margin-bottom:var(--space-12);color:var(--color-text-muted);font-size:var(--text-base);line-height:1.9;">
+        Atividades acadêmicas na <em style="color:var(--neon-cyan);font-style:normal;">Unicamp</em> que vão além da sala de aula — unindo ciência, tecnologia e impacto social.
+      </div>
+
+      <div class="academic-section reveal">
+        <div class="academic-label">// Projeto de Pesquisa</div>
+        <h3 class="academic-title">Em Desenvolvimento</h3>
+        <p class="academic-body">
+          Projeto de pesquisa acadêmica em andamento na Unicamp. Em breve mais detalhes sobre tema, metodologia e resultados.
+          <!-- TODO: Adicione título, objetivo e descrição do projeto de pesquisa aqui -->
+        </p>
+        <div class="academic-tags">
+          <span class="academic-tag">Unicamp</span>
+          <span class="academic-tag">Pesquisa</span>
+          <span class="academic-tag">2026</span>
+        </div>
+      </div>
+
+      <div class="academic-section reveal">
+        <div class="academic-label">// Projeto de Extensão</div>
+        <h3 class="academic-title">Tecnologia para Crianças</h3>
+        <p class="academic-body">
+          Trabalho de extensão universitária focado em levar tecnologia e pensamento computacional para crianças. Um projeto que une formação técnica com responsabilidade social.
+          <!-- TODO: Adicione detalhes do projeto de extensão com crianças aqui -->
+        </p>
+        <div class="academic-tags">
+          <span class="academic-tag">Extensão</span>
+          <span class="academic-tag">Educação</span>
+          <span class="academic-tag">Impacto Social</span>
+          <span class="academic-tag">Unicamp</span>
+        </div>
+      </div>
+
+      <div class="academic-section reveal">
+        <div class="academic-label">// Formação</div>
+        <h3 class="academic-title">Trajetória Educacional</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--space-6);margin-top:var(--space-4);">
+          <div>
+            <div style="font-family:var(--font-display);color:var(--neon-cyan);font-size:var(--text-sm);letter-spacing:0.1em;margin-bottom:var(--space-1);">2024 — Presente</div>
+            <div style="font-family:var(--font-display);color:var(--color-text);font-size:var(--text-base);margin-bottom:var(--space-2);">Análise e Desenvolvimento de Sistemas — Unicamp</div>
+            <p class="academic-body">Graduação em TADS com foco em arquitetura de software, engenharia de sistemas e projetos aplicados. Participação em pesquisa e extensão universitária.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);color:var(--neon-magenta);font-size:var(--text-sm);letter-spacing:0.1em;margin-bottom:var(--space-1);">2022 — 2023</div>
+            <div style="font-family:var(--font-display);color:var(--color-text);font-size:var(--text-base);margin-bottom:var(--space-2);">Técnico em TI — Escolas Padre Anchieta</div>
+            <p class="academic-body">Formação técnica integrada ao ensino médio: HTML, CSS, JavaScript, Java, C#, SQL Server, Arduino, Redes. TCC com projeto IoT real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026</footer>
+  </div>
+
+  <script>
+    function navigate(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      const activeLink = document.querySelector('.nav-links a[onclick="navigate(\'' + page + '\')"]');
+      if (activeLink) activeLink.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.getElementById('navLinks').classList.remove('open');
+    }
+    const hash = location.hash.replace('#', '') || 'home';
+    if (['home','projects','about','academic'].includes(hash)) navigate(hash);
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    const phrases = ['Full-Stack Developer','React & Next.js','TypeScript Enjoyer','Docker Sailor','ADS @ Unicamp'];
+    let phraseIndex = 0, charIndex = 0, isDeleting = false;
+    const el = document.getElementById('typewriter');
+    function type() {
+      const current = phrases[phraseIndex];
+      const displayed = isDeleting ? current.substring(0, charIndex--) : current.substring(0, charIndex++);
+      el.innerHTML = displayed + '<span class="cursor-blink">_</span>';
+      let speed = isDeleting ? 60 : 100;
+      if (!isDeleting && charIndex === current.length + 1) { speed = 2000; isDeleting = true; }
+      else if (isDeleting && charIndex < 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; charIndex = 0; speed = 400; }
+      setTimeout(type, speed);
+    }
+    type();
+  </script>
 </body>
-
 </html>
