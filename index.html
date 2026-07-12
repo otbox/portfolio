@@ -4,412 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>&lt;/dev&gt; Otávio Cruz</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="grid-bg">
 
+  <!-- ===== NAVEGAÇÃO ===== -->
   <nav>
     <div class="nav-logo">&lt;<span>/</span>dev&gt; Otávio Cruz</div>
     <div class="nav-links" id="navLinks">
-      <a href="#home"     class="active" onclick="navigate('home')">Home</a>
-      <a href="#projects" onclick="navigate('projects')">Projetos</a>
-      <a href="#about"    onclick="navigate('about')">About</a>
-      <a href="#academic" onclick="navigate('academic')">Acadêmico</a>
+      <a href="#home"     data-page="home"     class="active">Home</a>
+      <a href="#projects" data-page="projects">Projetos</a>
+      <a href="#about"    data-page="about">About</a>
+      <a href="#academic" data-page="academic">Acadêmico</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- ===== HOME ===== -->
-  <div class="page active" id="page-home">
-    <section class="hero">
-      <div class="hero-bg-glow"></div>
-      <div class="hero-content">
-        <div>
-          <p class="hero-label">// Full-Stack Developer — Limeira/SP</p>
-          <h1 class="hero-name">
-            <span class="chroma-name" data-text="Otávio">Otávio</span><br>
-            <span class="chroma-name" data-text="Cruz" style="animation-delay:0.5s;">Cruz</span>
-          </h1>
-          <p class="hero-tagline" id="typewriter"><span class="cursor-blink">_</span></p>
-          <p class="hero-desc">Desenvolvedor apaixonado por transformar lógica em interfaces. Graduando em ADS na <strong style="color:var(--color-text)">Unicamp</strong>, com foco em React/Next.js, TypeScript, Docker e arquitetura de software.</p>
-          <div class="hero-badges">
-            <span class="badge">React</span>
-            <span class="badge">Next.js</span>
-            <span class="badge">TypeScript</span>
-            <span class="badge magenta">Laravel</span>
-            <span class="badge magenta">PHP</span>
-            <span class="badge">Docker</span>
-            <span class="badge">Node.js</span>
-            <span class="badge magenta">Arduino</span>
-          </div>
-          <div class="hero-cta">
-            <a href="#projects" class="btn-primary" onclick="navigate('projects')">Ver Projetos</a>
-            <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub</a>
-          </div>
-        </div>
-        <div class="cube-wrapper">
-          <div class="scene">
-            <div class="cubo">
-              <div class="face frente">OTÁVIO</div>
-              <div class="face traz">DEV</div>
-              <div class="face direita">CODE</div>
-              <div class="face esquerda">BUILD</div>
-              <div class="face cima">REACT</div>
-              <div class="face baixo">PHP</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- ===== CONTAINER DE PÁGINAS ===== -->
+  <!-- O conteúdo de cada página é carregado via fetch() em js/app.js -->
+  <main id="page-container">
+    <div class="page-loading">Carregando</div>
+  </main>
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <h2 class="section-title">Projetos em <span class="glow">Destaque</span></h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card reveal">
-          <div class="project-card-top">
-            <span class="project-tag">IoT · Full-Stack</span>
-            <div class="project-links">
-              <a href="https://github.com/otbox/TCC" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-              </a>
-              <a href="https://estufa-5414b.web.app/" target="_blank" rel="noopener noreferrer" aria-label="Live">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              </a>
-            </div>
-          </div>
-          <h3 class="project-title">Gestão de Estufa</h3>
-          <p class="project-desc">Sistema IoT de monitoramento em tempo real com Arduino coletando temperatura e umidade, controlando dispositivos automaticamente. Web + App mobile com API PHP e banco MySQL.</p>
-          <div class="project-tech">
-            <span class="tech-pill">React</span><span class="tech-pill">React Native</span>
-            <span class="tech-pill">PHP</span><span class="tech-pill">MySQL</span>
-            <span class="tech-pill">Arduino</span><span class="tech-pill">Axios</span>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-card-top">
-            <span class="project-tag">E-commerce · Full-Stack</span>
-            <div class="project-links">
-              <a href="https://loja-705b4.web.app/" target="_blank" rel="noopener noreferrer" aria-label="Live">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              </a>
-            </div>
-          </div>
-          <h3 class="project-title">Ecommerce Simples</h3>
-          <p class="project-desc">Plataforma de vendas com React, API PHP e MySQL. Solução criativa para armazenamento de imagens via IMGBB com compressão automática — orçamento zero de infraestrutura.</p>
-          <div class="project-tech">
-            <span class="tech-pill">React</span><span class="tech-pill">PHP</span>
-            <span class="tech-pill">MySQL</span><span class="tech-pill">IMGBB API</span>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-card-top">
-            <span class="project-tag">Automação · DevOps</span>
-            <div class="project-links">
-              <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-              </a>
-            </div>
-          </div>
-          <h3 class="project-title">Spotify Downloader</h3>
-          <p class="project-desc">Downloader de playlists Spotify com busca via API oficial, servidor Node.js + FFmpeg + yt-dlp, tudo containerizado com Docker. Frontend em React.</p>
-          <div class="project-tech">
-            <span class="tech-pill">React</span><span class="tech-pill">Node.js</span>
-            <span class="tech-pill">Docker</span><span class="tech-pill">Spotify API</span><span class="tech-pill">FFmpeg</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Router & interações globais -->
+  <script src="js/app.js"></script>
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <h2 class="section-title">Linha do <span class="glow">Tempo</span></h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-year">2021</div>
-          <div class="timeline-title">Início na Programação</div>
-          <div class="timeline-body">Durante a pandemia, começou a explorar desenvolvimento web por conta própria. Primeiros passos com HTML e CSS em cursos online — o início de tudo.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot magenta"></div>
-          <div class="timeline-year magenta">2022</div>
-          <div class="timeline-title">Ensino Técnico — Escolas Padre Anchieta</div>
-          <div class="timeline-body">Formação técnica integrada em TI: HTML, CSS, JavaScript, Java, C#, SQL Server, Arduino e Redes de Computadores.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-year">2023</div>
-          <div class="timeline-title">TCC — Gestão de Estufa</div>
-          <div class="timeline-body">Projeto final integrando React, React Native, PHP, MySQL e Arduino num sistema IoT real de controle ambiental automatizado.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot magenta"></div>
-          <div class="timeline-year magenta">2024</div>
-          <div class="timeline-title">ADS — Unicamp</div>
-          <div class="timeline-body">Ingresso em Análise e Desenvolvimento de Sistemas na Unicamp (TADS). Aprofundamento em TypeScript, Docker, arquitetura e full-stack.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-year">2025</div>
-          <div class="timeline-title">Mercado & Stack de Produção</div>
-          <div class="timeline-body">Evolução para Next.js, TypeScript avançado, CI/CD no GitLab, containers Docker e início do backend com Laravel/PHP.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot magenta"></div>
-          <div class="timeline-year magenta">2026 — Agora</div>
-          <div class="timeline-title">Full-Stack + Pesquisa Acadêmica</div>
-          <div class="timeline-body">Atuando como desenvolvedor full-stack com foco em performance. Em paralelo, desenvolvendo projeto de pesquisa na Unicamp e extensão com crianças.</div>
-        </div>
-      </div>
-    </div>
+  <!-- Delegação de cliques para links de navegação interna -->
+  <script>
+    document.addEventListener('click', function (e) {
+      const link = e.target.closest('[data-nav]');
+      if (!link) return;
+      e.preventDefault();
+      navigate(link.dataset.nav);
+    });
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <h2 class="section-title">Stack de <span class="glow">Tecnologias</span></h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" width="36" height="36" loading="lazy"><span>HTML5</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/css3/1572B6" alt="CSS3" width="36" height="36" loading="lazy"><span>CSS3</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" width="36" height="36" loading="lazy"><span>JavaScript</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" width="36" height="36" loading="lazy"><span>TypeScript</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" width="36" height="36" loading="lazy"><span>React</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/nextdotjs/ffffff" alt="Next.js" width="36" height="36" loading="lazy"><span>Next.js</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel" width="36" height="36" loading="lazy"><span>Laravel</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP" width="36" height="36" loading="lazy"><span>PHP</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="36" height="36" loading="lazy"><span>Docker</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" width="36" height="36" loading="lazy"><span>Git</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/linux/ffffff" alt="Linux" width="36" height="36" loading="lazy"><span>Linux</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/arduino/00979D" alt="Arduino" width="36" height="36" loading="lazy"><span>Arduino</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" width="36" height="36" loading="lazy"><span>Python</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" width="36" height="36" loading="lazy"><span>MySQL</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/vite/646CFF" alt="Vite" width="36" height="36" loading="lazy"><span>Vite</span></div>
-        <div class="skill-item reveal"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" width="36" height="36" loading="lazy"><span>Node.js</span></div>
-      </div>
-      <div class="social-row">
-        <a href="https://www.linkedin.com/in/otávio-marques-cruz-0774912aa" target="_blank" rel="noopener noreferrer" class="social-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/otbox" target="_blank" rel="noopener noreferrer" class="social-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026 — Feito com neon e caffeine ☕</footer>
-  </div>
+    document.addEventListener('click', function (e) {
+      const navLink = e.target.closest('.nav-links a[data-page]');
+      if (!navLink) return;
+      e.preventDefault();
+      navigate(navLink.dataset.page);
+    });
+  </script>
 
-  <!-- ===== PROJECTS ===== -->
-  <div class="page" id="page-projects">
-    <div class="coming-soon-wrapper">
-      <div class="coming-soon-bg-glow"></div>
-      <div class="coming-soon-inner">
-        <div class="coming-soon-glitch">EM BREVE</div>
-        <p class="coming-soon-sub">// nova visualização de projetos em construção</p>
-        <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-          <span class="badge">Galeria Interativa</span>
-          <span class="badge magenta">Filtro por Tech</span>
-          <span class="badge">Case Studies</span>
-        </div>
-        <div style="margin-top:2rem;">
-          <a href="#home" class="btn-ghost" onclick="navigate('home')">← Voltar ao Home</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== ABOUT ===== -->
-  <div class="page" id="page-about">
-    <div class="section" style="padding-top:clamp(2rem,6vw,5rem);">
-      <div class="section-header">
-        <span class="section-number">00</span>
-        <h2 class="section-title">Sobre <span class="glow">Mim</span></h2>
-        <div class="section-line"></div>
-      </div>
-      <div style="max-width:70ch;margin-bottom:var(--space-12);">
-        <p style="color:var(--color-text-muted);font-size:var(--text-base);line-height:1.9;">
-          Além do terminal e do editor, tem uma pessoa curiosa que gosta tanto de desmontar um motor quanto de montar um circuito. Sou movido pela curiosidade — dentro e fora do código.
-        </p>
-      </div>
-      <div class="about-grid">
-        <div>
-          <div class="about-card reveal">
-            <span class="about-card-icon">🚗</span>
-            <div class="about-card-title">Mecânica & Carros</div>
-            <p>Apaixonado por automóveis e manutenção automotiva. Gosto de entender como as coisas funcionam por baixo do capô — tanto nos carros quanto nos sistemas que programo.</p>
-          </div>
-          <div class="about-card reveal" style="margin-top:var(--space-4);">
-            <span class="about-card-icon">🔌</span>
-            <div class="about-card-title">Eletrônica & IoT</div>
-            <p>Eletrônica e projetos com Arduino e sensores são meu playground físico. A ideia de conectar o mundo digital ao físico é o que me levou a criar o projeto da estufa.</p>
-          </div>
-        </div>
-        <div>
-          <div class="about-card reveal">
-            <span class="about-card-icon">🍳</span>
-            <div class="about-card-title">Culinária</div>
-            <p>Cozinhar é uma forma de criatividade fora da tela. Seguir uma receita como um algoritmo, ajustar os parâmetros ao gosto — há mais lógica na cozinha do que parece.</p>
-          </div>
-          <div class="about-card reveal" style="margin-top:var(--space-4);">
-            <span class="about-card-icon">📡</span>
-            <div class="about-card-title">Smart Devices</div>
-            <p>Curioso por automação residencial, dispositivos inteligentes e o universo de gadgets conectados. Sempre explorando o que há de novo no ecossistema IoT.</p>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:var(--space-12);">
-        <div class="section-header">
-          <span class="section-number">—</span>
-          <h3 class="section-title" style="font-size:var(--text-lg);">O que me move</h3>
-          <div class="section-line"></div>
-        </div>
-        <ul class="hobbies-list">
-          <li>Aprender continuamente — backend, machine learning e visão computacional</li>
-          <li>Resolver problemas complexos de performance e arquitetura de sistemas</li>
-          <li>Construir coisas que existam de verdade — hardware, IoT, automação física</li>
-          <li>Explorar a intersecção entre desenvolvimento de software e o mundo físico</li>
-          <li>Contribuir com projetos que impactem pessoas reais</li>
-        </ul>
-      </div>
-    </div>
-    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026</footer>
-  </div>
-
-  <!-- ===== ACADEMIC ===== -->
-  <div class="page" id="page-academic">
-    <div class="section" style="padding-top:clamp(2rem,6vw,5rem);">
-      <div class="section-header">
-        <span class="section-number">EDU</span>
-        <h2 class="section-title">Acadêmico <span class="glow">&amp; Pesquisa</span></h2>
-        <div class="section-line"></div>
-      </div>
-      <div style="max-width:70ch;margin-bottom:var(--space-12);color:var(--color-text-muted);font-size:var(--text-base);line-height:1.9;">
-        Atividades acadêmicas na <em style="color:var(--neon-cyan);font-style:normal;">Unicamp</em> que vão além da sala de aula — unindo ciência, tecnologia e impacto social.
-      </div>
-
-      <!-- Projeto de Pesquisa -->
-      <div class="academic-section reveal">
-        <div class="academic-label">// Projeto de Pesquisa</div>
-        <h3 class="academic-title">Em Desenvolvimento</h3>
-        <p class="academic-body">
-          Projeto de pesquisa acadêmica em andamento na Unicamp. Em breve mais detalhes sobre tema, metodologia e resultados.
-        </p>
-        <div class="academic-tags">
-          <span class="academic-tag">Unicamp</span>
-          <span class="academic-tag">Pesquisa</span>
-          <span class="academic-tag">2026</span>
-        </div>
-        <button class="saiba-mais-btn" onclick="toggleSaibaMais(this)" aria-expanded="false">
-          Saiba mais
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </button>
-        <div class="saiba-mais-content" aria-hidden="true">
-          <div class="saiba-mais-inner">
-            <div class="detail-row">
-              <div class="detail-item">
-                <span class="detail-label">Instituição</span>
-                <span class="detail-value">Unicamp — TADS</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Ano</span>
-                <span class="detail-value">2026</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Status</span>
-                <span class="detail-value">Em andamento</span>
-              </div>
-            </div>
-            <p>
-              <!-- TODO: Adicione aqui o título e descrição completa do seu projeto de pesquisa.
-                   Exemplo: "Este projeto investiga o uso de machine learning para otimização de sistemas distribuídos..." -->
-              Detalhes do projeto serão adicionados em breve. Fique de olho!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projeto de Extensão -->
-      <div class="academic-section reveal">
-        <div class="academic-label">// Projeto de Extensão</div>
-        <h3 class="academic-title">Tecnologia para Crianças</h3>
-        <p class="academic-body">
-          Trabalho de extensão universitária focado em levar tecnologia e pensamento computacional para crianças. Um projeto que une formação técnica com responsabilidade social.
-        </p>
-        <div class="academic-tags">
-          <span class="academic-tag">Extensão</span>
-          <span class="academic-tag">Educação</span>
-          <span class="academic-tag">Impacto Social</span>
-          <span class="academic-tag">Unicamp</span>
-        </div>
-        <button class="saiba-mais-btn" onclick="toggleSaibaMais(this)" aria-expanded="false">
-          Saiba mais
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </button>
-        <div class="saiba-mais-content" aria-hidden="true">
-          <div class="saiba-mais-inner">
-            <div class="detail-row">
-              <div class="detail-item">
-                <span class="detail-label">Público</span>
-                <span class="detail-value">Crianças</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Área</span>
-                <span class="detail-value">Educação Tech</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Vínculo</span>
-                <span class="detail-value">Unicamp</span>
-              </div>
-            </div>
-            <p>
-              <!-- TODO: Adicione aqui o nome do projeto, o que você faz, onde acontece e qual o impacto esperado.
-                   Exemplo: "O projeto Código Criativo leva oficinas de programação visual (Scratch) para escolas municipais..." -->
-              Este projeto de extensão está sendo desenvolvido com foco em democratizar o acesso à tecnologia desde a infância, estimulando o pensamento lógico e criativo através de atividades práticas e lúdicas.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Formação -->
-      <div class="academic-section reveal">
-        <div class="academic-label">// Formação</div>
-        <h3 class="academic-title">Trajetória Educacional</h3>
-        <div style="display:flex;flex-direction:column;gap:var(--space-6);margin-top:var(--space-4);">
-          <div>
-            <div style="font-family:var(--font-display);color:var(--neon-cyan);font-size:var(--text-sm);letter-spacing:0.1em;margin-bottom:var(--space-1);">2024 — Presente</div>
-            <div style="font-family:var(--font-display);color:var(--color-text);font-size:var(--text-base);margin-bottom:var(--space-2);">Análise e Desenvolvimento de Sistemas — Unicamp</div>
-            <p class="academic-body">Graduação em TADS com foco em arquitetura de software, engenharia de sistemas e projetos aplicados. Participação em pesquisa e extensão universitária.</p>
-          </div>
-          <div>
-            <div style="font-family:var(--font-display);color:var(--neon-magenta);font-size:var(--text-sm);letter-spacing:0.1em;margin-bottom:var(--space-1);">2022 — 2023</div>
-            <div style="font-family:var(--font-display);color:var(--color-text);font-size:var(--text-base);margin-bottom:var(--space-2);">Técnico em TI — Escolas Padre Anchieta</div>
-            <p class="academic-body">Formação técnica integrada ao ensino médio: HTML, CSS, JavaScript, Java, C#, SQL Server, Arduino, Redes. TCC com projeto IoT real.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <footer><span>&lt;/dev&gt;</span> Otávio Cruz — 2026</footer>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
